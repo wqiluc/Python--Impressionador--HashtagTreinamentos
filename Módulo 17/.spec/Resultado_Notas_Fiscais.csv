@@ -1,0 +1,4 @@
+arquivo,tipo,nome_vendeu,cnpj_vendeu,nome_comprou,cpf_comprou,valor_total
+DANFEBrota.xml,NF-e (produto),BROTA COMPANY COMERCIO DE PLANTAS LTDA,36882195000279,Lira da Hashtag,10000000000,374.17
+DANFENespresso.xml,NF-e (produto),NESTLE BRASIL LTDA,60409075055054,Lira da Hashtag,11122233344,849.00
+NotaCariocaHashtag.xml,NFS-e (serviço),LIRA BOLADO NO XML,30000000000101,HASHTAG TREINAMENTOS LTDA,26344392000108,4500
