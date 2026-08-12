@@ -107,6 +107,8 @@ Este repositório tem como objetivo aprofundar os conhecimentos em <strong>Pytho
   <img src="https://img.shields.io/badge/Jupyter-111827?style=flat-square&logo=jupyter&logoColor=F37626"/>
   <img src="https://img.shields.io/badge/Python-111827?style=flat-square&logo=python&logoColor=3776AB"/>
   <img src="https://img.shields.io/badge/Pandas-111827?style=flat-square&logo=pandas&logoColor=white"/>
+  <img src="https://img.shields.io/badge/NumPy-111827?style=flat-square&logo=numpy&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Matplotlib-111827?style=flat-square&logo=python&logoColor=11557C"/>
   <img src="https://img.shields.io/badge/Plotly-111827?style=flat-square&logo=plotly&logoColor=white"/>
   <img src="https://img.shields.io/badge/Regex-111827?style=flat-square&logo=python&logoColor=FFD43B"/>
   <img src="https://img.shields.io/badge/NBFormat-111827?style=flat-square&logo=jupyter&logoColor=white"/>
@@ -127,12 +129,22 @@ Este repositório tem como objetivo aprofundar os conhecimentos em <strong>Pytho
   <img src="https://img.shields.io/badge/CSV_Files-111827?style=flat-square&logo=-data-&logoColor=FFD43B"/>
   <img src="https://img.shields.io/badge/CSV_Automação-111827?style=flat-square&logo=python&logoColor=FFD43B"/>
   <img src="https://img.shields.io/badge/PyPDF2-111827?style=flat-square&logo=python&logoColor=EC1C24"/>
+  <img src="https://img.shields.io/badge/PyPDF-111827?style=flat-square&logo=python&logoColor=EC1C24"/>
+  <img src="https://img.shields.io/badge/PDFPlumber-111827?style=flat-square&logo=python&logoColor=red"/>
+  <img src="https://img.shields.io/badge/PikePDF-111827?style=flat-square&logo=python&logoColor=red"/>
+  <img src="https://img.shields.io/badge/Tabula--py-111827?style=flat-square&logo=python&logoColor=red"/>
+  <img src="https://img.shields.io/badge/Pillow-111827?style=flat-square&logo=python&logoColor=white"/>
   <img src="https://img.shields.io/badge/QR_Code-111827?style=flat-square&logo=python&logoColor=red"/>
   <img src="https://img.shields.io/badge/Gerador_de_Senhas-111827?style=flat-square&logo=python&logoColor=FFD43B"/>
   <img src="https://img.shields.io/badge/python--docx-111827?style=flat-square&logo=python&logoColor=2B579A"/>
+  <img src="https://img.shields.io/badge/XMLtodict-111827?style=flat-square&logo=python&logoColor=FFD43B"/>
   <img src="https://img.shields.io/badge/Pathlib-111827?style=flat-square&logo=python&logoColor=FFD43B"/>
   <img src="https://img.shields.io/badge/OS_Module-111827?style=flat-square&logo=python&logoColor=white"/>
   <img src="https://img.shields.io/badge/Shutil-111827?style=flat-square&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Datetime-111827?style=flat-square&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Collections-111827?style=flat-square&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Locale-111827?style=flat-square&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/tqdm-111827?style=flat-square&logo=python&logoColor=FFC107"/>
   <img src="https://img.shields.io/badge/MySQL-111827?style=flat-square&logo=mysql&logoColor=white"/>
   <img src="https://img.shields.io/badge/SQLite-111827?style=flat-square&logo=sqlite&logoColor=white"/>
   <img src="https://img.shields.io/badge/PostgreSQL-111827?style=flat-square&logo=postgresql&logoColor=white"/>
