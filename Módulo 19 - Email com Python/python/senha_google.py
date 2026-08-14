@@ -1,0 +1,1 @@
+senha_temp_google = "ksac zrgc pnnl agsy"

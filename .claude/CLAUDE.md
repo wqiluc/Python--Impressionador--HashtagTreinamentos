@@ -1,33 +1,30 @@
-# Python Impressionador — Hashtag Treinamentos
+<h1 align="center">
+  🤖 <span style="color:#306998;">CLAUDE.md</span> — <br>
+  <span style="color:#FFD43B;">Python Impressionador</span> · Hashtag Treinamentos
+</h1>
 
-Repositório de estudos do curso **Python Impressionador** (Hashtag Treinamentos). Contém as aulas e exercícios de cada módulo do curso, em Jupyter Notebook e em script Python puro.
+<p align="center">
+  Instruções de contexto para o Claude Code trabalhar neste repositório de estudos.
+  <br><br>
+  <img src="https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=black" width="75"/> <img src="https://img.shields.io/badge/-Python-3776AB?style=for-the-badge&logo=python&logoColor=black" width="75"/>
+</p>
 
-## Estrutura do repositório
+## 📦 Sobre o repositório
 
-Cada módulo é uma pasta própria na raiz (`módulo 1`, `módulo 2`, ..., `Módulo 15 - pandas`, `módulo extra_de_exércicios`), sempre com o mesmo padrão interno:
+Repositório de estudos do curso **Python Impressionador** (Hashtag Treinamentos). Contém as aulas e exercícios de cada módulo do curso, em Jupyter Notebook e em script Python puro. Visão geral e showcase completo em [README.md](../README.md).
 
-- `.ipynb/` (ou `ipynb/` nos módulos 13 e 14) — os notebooks das aulas, numerados sequencialmente pelo número global da aula (ex.: `47-While 01.ipynb`).
-- `.python/` (ou `python/` nos módulos 13 e 14) — o mesmo conteúdo das aulas em `.py` puro, quando existe uma versão em script.
-- `cores.py` — helper com códigos ANSI de cores para saída no terminal (`Preto`, `Vermelho`, `Verde`, ...), reaproveitado em quase todos os módulos.
-- `__pycache__/` — bytecode compilado, não versionar mudanças aqui.
-
-Exceções e conteúdo extra por módulo:
-- `módulo 13/ipynb/` também tem `database.py` (dados mockados) e `tabela_funcionarios.xlsx`.
-- `módulo 12/.python/` e `módulo 14/.python/` têm `__init__.py` (pasta tratada como pacote).
-- `Módulo 15 - pandas/spec/` guarda os CSVs de apoio (dataset "Contoso") usados nos exercícios de pandas.
-- `módulo extra_de_exércicios/` reúne exercícios avulsos e não segue a numeração de aula — os arquivos têm nomes descritivos (`2-validar_senha.py`, `to-do-list_terminal.py`, etc.) e várias versões (`v1`, `v2`, `v3`) do mesmo exercício conforme evolui a solução.
-
-Ver detalhes de cada módulo em [SKILLS.md](SKILLS.md).
-
-## Convenções observadas
+## 📐 Convenções observadas
 
 - Numeração de arquivo = número global da aula no curso, não reinicia a cada módulo.
 - Nomes de arquivos e pastas em português, com acentos — preservar ao criar/mover arquivos.
 - Cada módulo é independente: `cores.py` é duplicado em cada pasta em vez de compartilhado.
+- A partir do módulo 15 não há um padrão fixo de "pasta com ponto vs. sem ponto" para `ipynb`/`python`/`spec` — cada módulo pode variar; sempre rode `ls -a` antes de assumir a estrutura de um módulo novo.
 - Ambiente: `.venv/` local (Python 3.14), não versionado.
 
-## Ao trabalhar neste repositório
+## ✅ Ao trabalhar neste repositório
 
 - Este é um repositório de estudo/aprendizado, não uma aplicação em produção — priorize clareza didática sobre abstrações genéricas.
-- Ao adicionar uma nova aula/exercício, siga o padrão existente do módulo (mesma dupla notebook + script, mesmo estilo de nome de arquivo).
+- Ao adicionar uma nova aula/exercício, siga o padrão existente do módulo (mesma dupla notebook + script, mesmo estilo de nome de arquivo, e confira se o módulo usa pastas com ou sem ponto antes de criar arquivos).
+- Pastas `spec/` (ou `.spec/`) guardam arquivos de apoio aos exercícios (CSV, XLSX, PDF, DOCX, XML) — não são lixo/output, não deletar nem mover sem necessidade.
 - Não é necessário rodar testes automatizados; para validar um script ou notebook, execute-o diretamente com Python/Jupyter.
+- Siga o padrão de arquitetura dos `.ipynb` (shields.io, tabelas, ícones, emojis etc.), detalhando completamente o notebook para ficar com cara de Notion.
