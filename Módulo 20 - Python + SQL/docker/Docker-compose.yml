@@ -1,0 +1,26 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/azure-sql-edge:latest
+    container_name: hashtag-sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "HashtagSql#2026"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+
+  mysql:
+    build: .
+    container_name: hashtag-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "HashtagSql#2024"
+      MYSQL_DATABASE: "HashtagCursoSQL"
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  sqlserver_data:
+  mysql_data:

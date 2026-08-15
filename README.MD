@@ -3,7 +3,6 @@
   <span style="color:#FFD43B;">Python Impressionador</span><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="36" style="vertical-align:middle;"/>
 </h1>
 
-
 <p align="center">
 <img src="img/Hashtag_logo2.jpeg" alt="Logo centro" width="480">
 </p>
@@ -103,7 +102,7 @@ Este repositório tem como objetivo aprofundar os conhecimentos em <strong>Pytho
 <h2 align="center">⛏️💻 Ferramentas Utilizadas: </h2>
 
   <p align="center">
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg" height="28"/><br>
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg" height="28"/> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/pycharm/pycharm-original.svg" width="32" height="" alt="PyCharm" /><br>
   <img src="https://img.shields.io/badge/Jupyter-111827?style=flat-square&logo=jupyter&logoColor=F37626"/>
   <img src="https://img.shields.io/badge/Python-111827?style=flat-square&logo=python&logoColor=3776AB"/>
   <img src="https://img.shields.io/badge/Pandas-111827?style=flat-square&logo=pandas&logoColor=white"/>

@@ -3,18 +3,20 @@
 <img src="https://img.shields.io/badge/Jupyter-111827?style=flat-square&logo=jupyter&logoColor=F37626" height="28"/>
 <img src="https://img.shields.io/badge/Python-111827?style=flat-square&logo=python&logoColor=3776AB" height="28"/>
 <img src="https://img.shields.io/badge/smtplib-built--in-3776AB?style=for-the-badge&logo=python&logoColor=white" height="28" alt="smtplib"/>
+<img src="https://img.shields.io/badge/imap--tools-IMAP-3776AB?style=for-the-badge&logo=python&logoColor=white" height="28" alt="imap-tools"/>
 <img src="https://img.shields.io/badge/Outlook-COM%20%2F%20win32com-0078D4?style=for-the-badge&logo=microsoftoutlook&logoColor=white" height="28" alt="Outlook"/>
 <img src="https://img.shields.io/badge/APIs%20terceiras-SendGrid%20%7C%20SES%20%7C%20Mailgun-informational?style=for-the-badge" height="28" alt="Serviços terceiros"/>
 
 <h2 align="left">🎯 O que este guia cobre: </h2>
 
-Existem **3 caminhos principais** para automatizar o envio de e-mails com Python. Eles não são concorrentes diretos — cada um resolve um cenário diferente (máquina pessoal com Outlook instalado vs. servidor sem interface vs. aplicação que envia milhares de e-mails transacionais). Este guia resume quando usar cada um, as bibliotecas envolvidas e os pontos de atenção.
+Automatizar e-mail com Python envolve duas direções: **enviar** e **ler**. Para enviar, existem **3 caminhos principais** — eles não são concorrentes diretos, cada um resolve um cenário diferente (máquina pessoal com Outlook instalado vs. servidor sem interface vs. aplicação que envia milhares de e-mails transacionais). Para ler (buscar e-mails recebidos, extrair anexos), o caminho coberto aqui é **IMAP** via `imap_tools`. Este guia resume quando usar cada um, as bibliotecas envolvidas e os pontos de atenção.
 
 | # | Abordagem | Biblioteca principal | Precisa de app/cliente instalado? |
 |---|---|---|---|
-| 1️⃣ | **SMTP puro** | `smtplib` + `email` (built-in) | ❌ Não |
-| 2️⃣ | **Outlook via COM** | `win32com.client` (pywin32) | ✅ Sim (Windows + Outlook) |
-| 3️⃣ | **Serviços terceiros (API)** | SDK do provedor (ex.: `sendgrid`, `boto3`, `yagmail`) | ❌ Não (precisa de conta/API key) |
+| 1️⃣ | **SMTP puro** (enviar) | `smtplib` + `email` (built-in) | ❌ Não |
+| 2️⃣ | **Outlook via COM** (enviar) | `win32com.client` (pywin32) | ✅ Sim (Windows + Outlook) |
+| 3️⃣ | **Serviços terceiros (API)** (enviar) | SDK do provedor (ex.: `sendgrid`, `boto3`, `yagmail`) | ❌ Não (precisa de conta/API key) |
+| 4️⃣ | **IMAP** (ler/baixar anexos) | `imap_tools` | ❌ Não |
 
 ---
 
@@ -127,6 +129,47 @@ sg.send(mensagem)
 | Não depende de servidor SMTP nem de Outlook instalado — funciona em qualquer nuvem/CI | Curva de configuração inicial maior (verificação de domínio, DNS/SPF/DKIM) |
 | Ideal para **produtos** (SaaS, e-commerce) que enviam e-mail transacional para clientes | Overkill para scripts pessoais simples — SMTP puro resolve com menos fricção |
 
+## 4️⃣ Leitura de e-mails via IMAP (`imap_tools`)
+
+<img src="https://img.shields.io/badge/M%C3%B3dulo-imap--tools-3776AB?style=for-the-badge&logo=python&logoColor=white" height="26" alt="imap-tools"/>
+<img src="https://img.shields.io/badge/Protocolo-IMAP-orange?style=for-the-badge" height="26" alt="IMAP"/>
+<img src="https://img.shields.io/badge/Plataforma-qualquer%20SO-success?style=for-the-badge" height="26" alt="Multiplataforma"/>
+
+### O que é
+
+IMAP é o protocolo "irmão" do SMTP: enquanto o SMTP **envia**, o IMAP **lê** a caixa de entrada de um servidor de e-mail. `imap_tools` é uma biblioteca de terceiros (`pip install imap-tools`) que envolve o protocolo em uma API Python simples, com filtros de busca prontos (`AND`, `from_`, `to`, `subject`, etc.) e acesso direto a assunto, corpo (texto/HTML) e anexos — sem parsear MIME na mão.
+
+### Exemplo mínimo
+
+```python
+from imap_tools import MailBox, AND
+
+usuario = "seu_email@gmail.com"
+senha = "senha_de_app" # mesma restrição do SMTP (ver seção 1️⃣)
+
+meu_email = MailBox("imap.gmail.com").login(usuario, senha)
+
+lista_emails = meu_email.fetch(AND(from_="remetente@gmail.com", to="destinatario@gmail.com"))
+
+for email in lista_emails:
+    print(email.subject)
+    print(email.text)
+    for anexo in email.attachments:
+        with open(anexo.filename, "wb") as arquivo:
+            arquivo.write(anexo.payload)
+```
+
+### Quando usar?
+
+| ✅ Vantagens | ⚠️ Cuidados |
+|---|---|
+| Filtros de busca prontos (`AND`/`OR`, `from_`, `to`, `subject`, `since`...) — sem lidar com a sintaxe crua do IMAP | Também exige **"senha de app"** no Gmail (mesma restrição do SMTP) |
+| API pythônica para ler texto, HTML e anexos direto do objeto do e-mail | Terceira lib (`pip install imap-tools`), não é built-in como `smtplib` |
+| Reaproveita o mesmo par usuário/senha de app usado para enviar (SMTP) | Nomes de pastas do Gmail (ex.: `[Gmail]/E-mails enviados`) mudam conforme o idioma da conta |
+| Único caminho deste guia para **ler/baixar anexos** de e-mails recebidos — os outros 3 só enviam | Sem filtro, `fetch()` pode trazer um volume grande de e-mails — sempre restrinja com `AND` |
+
+> 💡 Não é uma alternativa às opções 1️⃣-3️⃣ (que enviam) — é complementar: um fluxo comum é enviar por SMTP e, depois, checar respostas/anexos recebidos via IMAP.
+
 ## 🔀 Qual escolher?
 
 | Cenário 🖼️ | Melhor opção 🔑 |
@@ -135,6 +178,7 @@ sg.send(mensagem)
 | Relatório corporativo, PC Windows com Outlook já configurado | 2️⃣ **Outlook (COM)** |
 | Envio em massa, produto/aplicação com muitos usuários | 3️⃣ **Serviço terceiro (API)** |
 | Servidor Linux sem interface gráfica | 1️⃣ **SMTP puro** ou 3️⃣ **API** (nunca Outlook/COM) |
+| Preciso ler e-mails recebidos ou baixar anexos automaticamente | 4️⃣ **IMAP (`imap_tools`)** |
 
 <p align="center">
 <img src="https://img.shields.io/badge/M%C3%B3dulo-19%20Email%20com%20Python-3776AB?style=for-the-badge&logo=python&logoColor=blue" height="28" alt="Módulo 19 Email com Python"/>

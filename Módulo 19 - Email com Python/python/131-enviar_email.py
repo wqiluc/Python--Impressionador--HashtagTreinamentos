@@ -1,5 +1,4 @@
 # SMTP
-
 import smtplib as sm
 import email.message as mensagem
 from email.mime.multipart import MIMEMultipart
@@ -23,9 +22,9 @@ def enviar_email():
     link__img_python_dashboards = r"../img/python dashboards.png"
 
     dict_fotos = {"fotos": 
-    [
-        link_img_flask_django, link_img_kivy, link__img_python_dashboards
-    ]
+        [
+            link_img_flask_django, link_img_kivy, link__img_python_dashboards
+        ]   
     }
 
     tags_fotos = " ".join(f"<img src='{foto}' width='490' alt='{os.path.splitext(os.path.basename(foto))[0]}'>" for indice_foto, foto in enumerate(dict_fotos["fotos"]))
@@ -67,7 +66,6 @@ def enviar_email_anexo():
 
     msg.attach(MIMEText(corpo_email, "html"))
 
-    # anexar arquivos
     lista_arquivos = os.listdir("anexos")
     for indice_nome_arquivo, nome_arquivo in enumerate(lista_arquivos):
         with open(f"anexos/{nome_arquivo}", "rb") as arquivo:
@@ -81,43 +79,37 @@ def enviar_email_anexo():
     print(f"{CinzaClaro}Email{Reset} {Verde}enviado✅{Reset}")
 
 # IMAP
-
 def ler_infos_email():
     usuario = "lpp2@cesar.school"
     senha = senha_temp_google
 
     meu_email = MailBox("imap.gmail.com").login(usuario, senha)
 
-    # ver as pastas do meu email disponíveis
-    #for pasta in meu_email.folder.list():
-    #   print(pasta)
-
-    # meu_email.folder.set('[Gmail]/E-mails enviados')
-
-    lista_emails = meu_email.fetch(AND(from_="emailremetente@gmail.com", 
+    lista_emails = meu_email.fetch(AND(from_=f"{usuario.lower()}", 
                                        to="emaildestinatario@hotmail.com"))
 
-    for indice_email, email in enumerate(lista_emails):
+    for (indice_email), email in enumerate(lista_emails):
         if (len(email.attachments) > 0):
-            print(f"Email {indice_email + 1}: {email.subject}")
+            print(f"{CinzaClaro}Email {indice_email + 1}: {email.subject}{Reset}")
             print(email.text)
             print(email.html)
-            for indice_anexo, anexo in enumerate(email.attachments):
-                print(f"{indice_email + 1}º Email, Anexo {indice_anexo + 1}: ", anexo.filename)
+            for (indice_anexo), anexo in enumerate(email.attachments):
+                print(f"{indice_email + 1}º Email, Anexo {indice_anexo + 1}: ", 
+                      anexo.filename)
 
 def ler_anexos_email():
     usuario = "lpp2@cesar.school"
     senha = senha_temp_google
 
-    meu_email = MailBox("imap.gmail.com").login(usuario, senha)
+    meu_email = MailBox("imap.gmail.com").login(usuario.lower(), senha)
 
     lista_emails = meu_email.fetch(AND(from_="emailremetente@gmail.com", to="emaildestinatario@hotmail.com"))
 
-    for indice_email, email in enumerate(lista_emails):
+    for (indice_email), email in enumerate(lista_emails):
         if len(email.attachments) > 0:
-            print(email.subject)
-            print(email.text)
-            print(email.html)
+            print(f"{email.subject}")
+            print(f"{email.text}")
+            print(f"{email.html}")
             for indice_anexo, anexo in enumerate(email.attachments):
                 with open(f"Email {indice_email+1} - {anexo.filename}", "wb") as arquivo:
                     arquivo.write(anexo.payload)
@@ -125,7 +117,7 @@ def ler_anexos_email():
 
 funcoes_email = [enviar_email, enviar_email_anexo, ler_infos_email, ler_anexos_email]
 
-for indice_funcao, funcao in enumerate(funcoes_email):
+for (indice_funcao), funcao in enumerate(funcoes_email):
     if not (funcao()):
         pass
     else:
