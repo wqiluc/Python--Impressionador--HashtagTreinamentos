@@ -19,5 +19,6 @@ build/
 .idea/
 .DS_Store
 
+.claude/
 # Dataset grande demais para o GitHub (limite de 100MB)
 Módulo 15 - pandas/spec/Contoso - Vendas Consolidado.csv
