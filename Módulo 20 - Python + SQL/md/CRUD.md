@@ -281,8 +281,6 @@ flowchart TD
 
 > 🧠 A diferença central: **Read não muda nada**, então não precisa de `commit()` — o dado só viaja do banco pro Python. Já **Create, Update e Delete alteram o estado do banco**, e ficam pendentes até um `commit()` explícito (ou são desfeitos com `rollback()`). É por isso que só as três últimas letras do CRUD aparecem sempre acompanhadas de `conexao.commit()`.
 
----
-
 ## 🆚 7. CRUD em MySQL — Mesmo Padrão, Outro Dialeto
 
 Tudo feito com SQL Server via `pyodbc` tem equivalente direto em **MySQL**, com uma biblioteca própria (`mysql-connector-python`) e sintaxe SQL quase idêntica.
@@ -338,8 +336,6 @@ conexao.close()
 ```
 
 > 💡 É a **portabilidade de conceito**, mais do que de código, que faz valer a pena aprender o padrão CRUD uma vez e reaplicar em qualquer banco relacional. Ver [PYODBC.md](PYODBC.md) para os detalhes da conexão em si.
-
----
 
 ## 🧾 8. Resumo do CRUD
 

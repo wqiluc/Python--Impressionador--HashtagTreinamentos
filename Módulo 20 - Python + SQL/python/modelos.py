@@ -7,7 +7,6 @@ CAMINHO_BANCO = Path(__file__).resolve().parent.parent / "spec" / "hashtag_sqlal
 
 Base = declarative_base()
 
-
 class Categoria(Base):
     __tablename__ = "categorias"
 

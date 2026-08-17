@@ -54,8 +54,6 @@ O banco de dados roda como um **servidor** separado — um programa próprio, li
 
 O fluxo básico é sempre o mesmo: **conectar → executar um comando SQL → ler o resultado (se houver) → confirmar mudanças (`commit`) → fechar a conexão**.
 
----
-
 ## 🧩 2. As Duas Instalações Necessárias
 
 `pyodbc` sozinho não conecta em nada — ele é só a ponte. Quem realmente sabe falar o protocolo do SQL Server é o **driver ODBC**, instalado no sistema operacional (não com `pip`).
@@ -66,8 +64,6 @@ O fluxo básico é sempre o mesmo: **conectar → executar um comando SQL → le
 | Driver ODBC do SQL Server | Componente do sistema que sabe o protocolo do SQL Server | Windows: instalador da Microsoft · Mac/Linux: `unixodbc` + `msodbcsql` |
 
 > ⚠️ **Atenção:** em Mac e Linux, sem o driver ODBC instalado no sistema, `pyodbc` importa normalmente mas **toda tentativa de conexão falha**. É o erro mais comum de quem começa com `pyodbc` fora do Windows.
-
----
 
 ## 📦 3. Instalando por Sistema Operacional
 
@@ -103,8 +99,6 @@ brew tap microsoft/mssql-release https://github.com/Microsoft/homebrew-mssql-rel
 HOMEBREW_ACCEPT_EULA=Y ACCEPT_EULA=Y brew install unixodbc msodbcsql18
 ```
 
----
-
 ## 🔍 4. Verificando os Drivers ODBC Instalados
 
 Antes de tentar conectar, vale confirmar que o sistema enxerga o driver — `pyodbc.drivers()` lista tudo o que está registrado no ODBC do sistema operacional.
@@ -119,11 +113,9 @@ import pyodbc as py
 drivers_instalados = py.drivers()
 
 print("Drivers ODBC encontrados:")
-for driver in drivers_instalados:
-    print(f"  - {driver}")
+for indice_drive, driver in enumerate(drivers_instalados):
+    print(f" - {driver}")
 ```
-
----
 
 ## 🧵 5. Montando a String de Conexão
 
@@ -147,8 +139,6 @@ string_conexao = (
 )
 ```
 
----
-
 ## 🚀 6. Primeira Conexão de Verdade
 
 Com a string pronta, `pyodbc.connect()` abre a conexão. Se não der erro, o servidor aceitou usuário e senha.
@@ -165,8 +155,6 @@ print(versao_servidor.splitlines()[0])
 
 conexao.close()
 ```
-
----
 
 ## 🗺️ 7. Modelagem Visual — Sem Driver × Com Driver
 
@@ -191,8 +179,6 @@ flowchart TD
 ```
 
 > 🧠 `pyodbc` **nunca** fala direto com o SQL Server — ele sempre passa pelo driver ODBC do sistema operacional. É por isso que `import pyodbc` nunca falha (é só Python puro), mas `pyodbc.connect()` falha sem o driver certo instalado: falta a peça do meio.
-
----
 
 ## 🛡️ 8. Boas Práticas de Conexão
 
@@ -239,8 +225,6 @@ with pyodbc.connect(string_conexao) as conexao:
 
 > 💡 **Por que não usar `autocommit=True` sempre?** Porque às vezes você quer que várias mudanças aconteçam **juntas ou nenhuma delas** — se uma falhar no meio, o `rollback()` desfaz tudo, e o banco nunca fica num estado "pela metade".
 
----
-
 ## 🐳 9. Subindo o Banco com Docker
 
 O `SQLSERVER_HOST` de `conexao.py` aponta pra `localhost,1433` — precisa de um SQL Server rodando localmente *antes* da primeira célula. Quem sobe isso é o `docker-compose.yml` da pasta `docker/`, usando a imagem **Azure SQL Edge**.
@@ -261,8 +245,6 @@ docker start hashtag-sqlserver
 
 > ⚠️ Se essa etapa for pulada, `nova_conexao_sqlserver()` estoura erro de conexão — o driver não acha ninguém ouvindo em `localhost,1433`.
 
----
-
 ## 🆚 10. pyodbc × mysql-connector-python
 
 Nem todo banco relacional usa ODBC — o MySQL, por exemplo, tem driver Python próprio, sem componente extra do sistema operacional.
@@ -275,8 +257,6 @@ Nem todo banco relacional usa ODBC — o MySQL, por exemplo, tem driver Python p
 | Auto-incremento | `IDENTITY(1,1)` | `AUTO_INCREMENT` |
 
 O fluxo (conectar → cursor → `execute()` → `commit()`/`fetchall()` → fechar) é o mesmo — só muda o dialeto. Ver [CRUD.md](CRUD.md) para o CRUD completo comparando os dois.
-
----
 
 <p align="center">
   📓 Baseado nos notebooks <code>132</code> a <code>135</code> do <a href="../ipynb/">Módulo 20 — Python + SQL</a>.
